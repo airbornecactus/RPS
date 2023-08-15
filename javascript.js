@@ -1,3 +1,6 @@
+const btn = document.querySelector("#btn");
+btn.addEventListener("click", game);
+
 function playerSelection(userChoice) {
   switch (userChoice) {
     case "rock":
@@ -41,31 +44,25 @@ function determineWinner(getComputerChoice, playerSelection, userChoice) {
   }
 }
 
+let computerWins = 0;
+let playerWins = 0;
+
 function game() {
-  let computerWins = 0;
-  let playerWins = 0;
+  let userChoice = prompt("Rock, Paper, or Scissors?").toLowerCase();
 
-  for (let i = 0; i < 5; i++) {
-    let userChoice = prompt("Rock, Paper, or Scissors?").toLowerCase();
-
-    if (determineWinner(getComputerChoice, playerSelection, userChoice) === 1) {
-      playerWins = playerWins + 1;
-      console.log(
-        "Player wins! The score is " + playerWins + " to " + computerWins
-      );
-    } else if (
-      determineWinner(getComputerChoice, playerSelection, userChoice) === -1
-    ) {
-      computerWins = computerWins + 1;
-      console.log(
-        "Computer wins! The score is " + playerWins + " to " + computerWins
-      );
-    } else {
-      console.log(
-        "Tie Game! The score is " + playerWins + " to " + computerWins
-      );
-    }
+  if (determineWinner(getComputerChoice, playerSelection, userChoice) === 1) {
+    playerWins = playerWins + 1;
+    console.log(
+      "Player wins! The score is " + playerWins + " to " + computerWins
+    );
+  } else if (
+    determineWinner(getComputerChoice, playerSelection, userChoice) === -1
+  ) {
+    computerWins = computerWins + 1;
+    console.log(
+      "Computer wins! The score is " + playerWins + " to " + computerWins
+    );
+  } else {
+    console.log("Tie Game! The score is " + playerWins + " to " + computerWins);
   }
 }
-
-game();
