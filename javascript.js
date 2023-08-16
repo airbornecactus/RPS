@@ -1,5 +1,18 @@
-const btn = document.querySelector("#btn");
-btn.addEventListener("click", game);
+let computerWins = 0;
+let playerWins = 0;
+
+const btn = document.querySelector("#rock");
+btn.addEventListener("click", () => game("rock"));
+const paperBtn = document.querySelector("#paper");
+paperBtn.addEventListener("click", () => game("paper"));
+const scissorsBtn = document.querySelector("#scissors");
+scissorsBtn.addEventListener("click", () => game("scissors"));
+
+const score = document.querySelector("#score");
+const result = document.createElement("div");
+result.classList.add("result");
+result.textContent = "The score is:";
+score.appendChild(result);
 
 function playerSelection(userChoice) {
   switch (userChoice) {
@@ -44,25 +57,27 @@ function determineWinner(getComputerChoice, playerSelection, userChoice) {
   }
 }
 
-let computerWins = 0;
-let playerWins = 0;
-
-function game() {
-  let userChoice = prompt("Rock, Paper, or Scissors?").toLowerCase();
-
+function game(userChoice) {
+  // let userChoice = prompt("Rock, Paper, or Scissors?").toLowerCase();
+  const score = document.getElementById("score");
   if (determineWinner(getComputerChoice, playerSelection, userChoice) === 1) {
     playerWins = playerWins + 1;
-    console.log(
-      "Player wins! The score is " + playerWins + " to " + computerWins
-    );
+    score.textContent =
+      "Player wins! The score is " + playerWins + " to " + computerWins;
   } else if (
     determineWinner(getComputerChoice, playerSelection, userChoice) === -1
   ) {
     computerWins = computerWins + 1;
-    console.log(
-      "Computer wins! The score is " + playerWins + " to " + computerWins
-    );
+    score.textContent =
+      "Computer wins! The score is " + playerWins + " to " + computerWins;
   } else {
-    console.log("Tie Game! The score is " + playerWins + " to " + computerWins);
+    score.textContent =
+      "Tie Game! The score is " + playerWins + " to " + computerWins;
+  }
+
+  if (playerWins === 5) {
+    score.textContent = "Player wins!";
+  } else if (computerWins === 5) {
+    score.textContent = "Computer Wins!";
   }
 }
